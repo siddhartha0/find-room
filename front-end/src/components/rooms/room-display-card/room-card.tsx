@@ -11,9 +11,12 @@ import {
 import { roomdispalyCardPropTypes } from "../../../constant";
 import { useSelector } from "react-redux";
 import { user } from "../../../state-management/local/auth";
+import { useNavigate } from "react-router-dom";
 
 export const RoomDisplayCard = React.memo((data: roomdispalyCardPropTypes) => {
   const userInfo = useSelector(user);
+
+  const nav = useNavigate();
 
   return (
     <main className="flex bg-[#FBFBFB] gap-8 p-5 justify-between rounded-lg ">
@@ -53,7 +56,12 @@ export const RoomDisplayCard = React.memo((data: roomdispalyCardPropTypes) => {
       <section className="flex flex-col justify-around" id="price-button">
         <MediumInfoText title={`Rs. ${data.price}`} />
         {userInfo?.email === data.ownerEmail ? (
-          <Button className="w-[100%] p-2 rounded-xl">See Details</Button>
+          <Button
+            className="w-[100%] p-2 rounded-xl"
+            onClick={() => nav(`/booking-details/${data?._id}`)}
+          >
+            See Details
+          </Button>
         ) : (
           <Button className="w-[100%] p-2 rounded-xl"> Book Now</Button>
         )}

@@ -45,12 +45,21 @@ export const RoomDetailsLayout = React.memo(() => {
             <ShowImg img={data?.data.imgUrl} height="550px" width="850px" />
             <div className="flex flex-col gap-8 w-72">
               {data?.data.ownerEmail === userInfo?.email ? (
-                <Button
-                  className="w-[80%]"
-                  onClick={() => nav(`/booking-details/${data?.data._id}`)}
-                >
-                  Booking Details
-                </Button>
+                <div className="flex flex-col gap-4">
+                  <Button
+                    className="w-[80%]"
+                    onClick={() => nav(`/booking-details/${data?.data._id}`)}
+                  >
+                    Booking Details
+                  </Button>
+
+                  <Button
+                    className="w-[80%]"
+                    onClick={() => nav(`/booking-details/${data?.data._id}`)}
+                  >
+                    Edit Room
+                  </Button>
+                </div>
               ) : (
                 <RoomBookingDetails
                   frequency={data?.data.frequency}
