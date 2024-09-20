@@ -63,7 +63,12 @@ export const RoomDisplayCard = React.memo((data: roomdispalyCardPropTypes) => {
             See Details
           </Button>
         ) : (
-          <Button className="w-[100%] p-2 rounded-xl"> Book Now</Button>
+          <Button
+            className="w-[100%] p-2 rounded-xl"
+            onClick={() => nav(`/room-details/${data._id}`)}
+          >
+            Book Now
+          </Button>
         )}
       </section>
     </main>
