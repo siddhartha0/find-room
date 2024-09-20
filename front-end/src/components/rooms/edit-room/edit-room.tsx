@@ -38,6 +38,7 @@ interface propTypes {
   price?: string;
   title?: string;
   totalbed?: number;
+  id?: string;
   loadData?: boolean;
 }
 
@@ -55,6 +56,7 @@ export const EditRoom = React.memo(
     title,
     totalbed,
     loadData,
+    id,
   }: propTypes) => {
     const [details, setDetails] = useState({
       title: title ?? "",
@@ -106,7 +108,7 @@ export const EditRoom = React.memo(
       setDetails({ ...details, [e.target.name]: value });
     };
 
-    const createRoom = async (e: React.FormEvent<HTMLFormElement>) => {
+    const updateRoom = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
       if (img) {
@@ -119,9 +121,11 @@ export const EditRoom = React.memo(
           ...details,
           imgUrl: picsUrl.data?.imgUrl,
         };
-        await updateHostel(toPost).then((data) => {
-          if (data.error) {
-            const error = data.error as FetchBaseQueryError;
+
+        await updateHostel({ id: id, data: toPost }).then((resp) => {
+          if (resp.error) {
+            console.log(resp.error);
+            const error = resp.error as FetchBaseQueryError;
             if ("data" in error) {
               toast.error((error.data as errorTypes).message as string);
             }
@@ -129,8 +133,9 @@ export const EditRoom = React.memo(
               toast.error("Server timed out. Please Try Again Later!!!");
             }
           }
-          if (data.data) {
-            toast.success(data.data.msg);
+
+          if (resp.data) {
+            toast.success(resp.data.msg);
           }
         });
       }
@@ -150,7 +155,7 @@ export const EditRoom = React.memo(
         {isLoading || loadData || updateHostelLoading ? (
           <LoaderSpinner />
         ) : (
-          <form onSubmit={createRoom} className="flex flex-col w-[80%] m-auto">
+          <form onSubmit={updateRoom} className="flex flex-col w-[80%] m-auto">
             <div>
               <div className="border-b border-gray-900/10 pb-12">
                 <HeaderInfoText title="Hostel & Rooms Information" />

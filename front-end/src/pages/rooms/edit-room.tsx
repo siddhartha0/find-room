@@ -23,6 +23,7 @@ export const EditRoomPage = memo(() => {
       title={data?.data?.title}
       totalbed={data?.data?.totalbed}
       loadData={isLoading}
+      id={id}
     />
   );
 });

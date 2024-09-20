@@ -4,6 +4,7 @@ import {
   DeleteEntity,
   FetchOneEntityById,
   GetAllEntites,
+  UpdateEntity,
 } from "../crud-operation/common-crud";
 import { RoomModel } from "../model";
 
@@ -24,7 +25,39 @@ export const getRoomById = (
 };
 
 export const updateRoom = (req: Request, res: Response, next: NextFunction) => {
-  // CreateEntity(req, res, next, RoomModel, req.body);
+  let updatedDetails = {};
+  const {
+    title,
+    hostelName,
+    imgUrl,
+    location,
+    price,
+    frequency,
+    peopleNumber,
+    totalbed,
+    email,
+    contact,
+    ownerEmail,
+  } = req.body.data;
+
+  UpdateEntity(req, res, next, RoomModel, () => {
+    if (req.body.data) {
+      updatedDetails = {
+        title: title,
+        hostelName: hostelName,
+        imgUrl: imgUrl,
+        location: location,
+        price: price,
+        frequency: frequency,
+        peopleNumber: peopleNumber,
+        totalbed: totalbed,
+        email: email,
+        contact: contact,
+        ownerEmail: ownerEmail,
+      };
+    }
+    return updatedDetails;
+  });
 };
 
 export const deleteRoom = (req: Request, res: Response, next: NextFunction) => {
