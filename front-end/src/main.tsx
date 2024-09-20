@@ -1,7 +1,14 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Home, RoomDetails, Rooms, BookingPage, ProfilePage } from "./pages";
+import {
+  Home,
+  RoomDetails,
+  Rooms,
+  BookingPage,
+  ProfilePage,
+  EditRoomPage,
+} from "./pages";
 import { LandingPageContent } from "./hooks";
 import { NavBar, RoomAdd } from "./components";
 import { store } from "./state-management/store/store";
@@ -22,6 +29,7 @@ createRoot(document.getElementById("root")!).render(
               <Route path="/room-details/:id" element={<RoomDetails />} />
               <Route path="" element={<OwnerPage />}>
                 <Route path="/add-room" element={<RoomAdd />} />
+                <Route path="/edit-room/:id" element={<EditRoomPage />} />
                 <Route path="/booking-details/:id" element={<BookingPage />} />
               </Route>
               <Route path="" element={<AuthenticatedRoutes />}>

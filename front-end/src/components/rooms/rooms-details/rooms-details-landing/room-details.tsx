@@ -55,7 +55,7 @@ export const RoomDetailsLayout = React.memo(() => {
 
                   <Button
                     className="w-[80%]"
-                    onClick={() => nav(`/booking-details/${data?.data._id}`)}
+                    onClick={() => nav(`/edit-room/${data?.data._id}`)}
                   >
                     Edit Room
                   </Button>

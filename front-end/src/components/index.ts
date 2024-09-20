@@ -9,6 +9,7 @@ export { RoomsLandingPage } from "./rooms/landing-page/room";
 export { FilterSection } from "./rooms/filter-section/filter-section";
 export { RoomDisplayCard } from "./rooms/room-display-card/room-card";
 export { RoomAdd } from "./rooms/add-room/add-room-form";
+export { EditRoom } from "./rooms/edit-room/edit-room";
 export { RoomBookingDetails } from "./rooms/rooms-details/room-booking-details/room-booking-details";
 export { BrandDetails } from "./rooms/rooms-details/room-booking-details/brand-details";
 export { RoomDetailsLayout } from "./rooms/rooms-details/rooms-details-landing/room-details";
