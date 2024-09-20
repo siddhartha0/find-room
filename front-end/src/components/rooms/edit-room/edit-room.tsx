@@ -18,14 +18,12 @@ import {
   InputField,
 } from "../../../units";
 import React, { useRef, useState } from "react";
-import { useCreateHostelMutation } from "../../../state-management/api/hostel-api";
+import { useUpdateHostelMutation } from "../../../state-management/api/hostel-api";
 import { useCloudinarySotrageMutation } from "../../../state-management/api/upload-pics";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { errorTypes } from "../../../constant";
 import toast, { Toaster } from "react-hot-toast";
 import LoaderSpinner from "../../../units/loader/loader-spinner";
-import { useSelector } from "react-redux";
-import { user } from "../../../state-management/local/auth";
 import { useNavigate } from "react-router-dom";
 
 interface propTypes {
@@ -58,8 +56,6 @@ export const EditRoom = React.memo(
     totalbed,
     loadData,
   }: propTypes) => {
-    const userInfo = useSelector(user);
-
     const [details, setDetails] = useState({
       title: title ?? "",
       hostelName: hostelName ?? "",
@@ -96,7 +92,8 @@ export const EditRoom = React.memo(
       }
     };
 
-    const [createHostel] = useCreateHostelMutation();
+    const [updateHostel, { isLoading: updateHostelLoading }] =
+      useUpdateHostelMutation();
 
     const [uploadToCloud, { isLoading }] = useCloudinarySotrageMutation();
 
@@ -122,7 +119,7 @@ export const EditRoom = React.memo(
           ...details,
           imgUrl: picsUrl.data?.imgUrl,
         };
-        await createHostel(toPost).then((data) => {
+        await updateHostel(toPost).then((data) => {
           if (data.error) {
             const error = data.error as FetchBaseQueryError;
             if ("data" in error) {
@@ -150,7 +147,7 @@ export const EditRoom = React.memo(
             current={true}
           />
         </BreadCrumbs>
-        {isLoading || loadData ? (
+        {isLoading || loadData || updateHostelLoading ? (
           <LoaderSpinner />
         ) : (
           <form onSubmit={createRoom} className="flex flex-col w-[80%] m-auto">
