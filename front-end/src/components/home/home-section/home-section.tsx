@@ -18,7 +18,7 @@ export const HomeSection = () => {
           className="flex flex-col  bg-bg-secondary rounded-lg m-auto w-[40%] p-10 gap-4"
           id="left-side"
         >
-          <HeaderInfoText title="City Hostel - Far From Home Don't worry. It feels home here !" />
+          <HeaderInfoText title="Girls Hostel - Far From Home Don't worry. It feels home here !" />
           <InfoText title="Amazing Collection of hostel. Find the best collection of hostel where you would have blast of fun & learning. " />
           <Button
             className="mt-5"
