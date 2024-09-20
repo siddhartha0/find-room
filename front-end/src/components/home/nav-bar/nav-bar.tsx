@@ -28,7 +28,7 @@ export const NavBar = React.memo(() => {
           <img
             src={companyLogo}
             alt="logo"
-            width={136}
+            width={60}
             onClick={() => nav("/")}
           />
         </section>
