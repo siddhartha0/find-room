@@ -11,6 +11,7 @@ import {
   ProfileLayout,
   ManageBookingPage,
   CurrentUserPage,
+  YourBookingPage,
 } from "./pages";
 import { LandingPageContent } from "./hooks";
 import { NavBar, RoomAdd } from "./components";
@@ -43,6 +44,7 @@ createRoot(document.getElementById("root")!).render(
                     element={<ManageBookingPage />}
                   />
                   <Route path="current-users" element={<CurrentUserPage />} />
+                  <Route path="your-booking" element={<YourBookingPage />} />
                 </Route>
               </Route>
             </Route>
