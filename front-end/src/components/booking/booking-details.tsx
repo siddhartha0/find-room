@@ -1,4 +1,4 @@
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import {
   BreadCrumbLayout,
   BreadCrumbs,
@@ -7,7 +7,12 @@ import {
   MediumInfoText,
 } from "../../units";
 import { useParams } from "react-router-dom";
-import { useGetBookingByIdQuery } from "../../state-management/api/booking-api";
+import {
+  useGetBookingByIdQuery,
+  useUpdateBookingMutation,
+} from "../../state-management/api/booking-api";
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import { errorTypes } from "../../constant";
 
 interface userDetails {
   userName: string;
@@ -43,7 +48,31 @@ export const BookingDetails = () => {
   const { id } = useParams();
 
   const { data, isLoading } = useGetBookingByIdQuery(id);
-  console.log(data);
+
+  const [udpateBooking, { isLoading: bookingUpdate }] =
+    useUpdateBookingMutation();
+
+  const makeDecision = async (label: string) => {
+    const updatedData = {
+      ...data.data,
+      status: label,
+    };
+    await udpateBooking({ id: id, data: updatedData }).then((resp) => {
+      if (resp.error) {
+        console.log(resp.error);
+        const error = resp.error as FetchBaseQueryError;
+        if ("data" in error) {
+          toast.error((error.data as errorTypes).message as string);
+        }
+        if ("error" in error) {
+          toast.error("Server timed out. Please Try Again Later!!!");
+        }
+      }
+      if (resp.data) {
+        toast.success("Successfully updated!!");
+      }
+    });
+  };
 
   return (
     <main className="flex flex-col p-8 gap-8">
@@ -56,7 +85,7 @@ export const BookingDetails = () => {
         </BreadCrumbs>
       </header>
 
-      {isLoading ? (
+      {isLoading || bookingUpdate ? (
         <LoaderSpinner />
       ) : (
         <section className="flex flex-col gap-4 bg-bg-secondary p-4">
@@ -87,16 +116,18 @@ export const BookingDetails = () => {
                     detail?.createdAt?.toString().slice(0, 10) ?? "2024-1-10"
                   }
                 />
-                <div className="   flex gap-4  ">
+                <div className="flex  gap-4  ">
                   <button
                     type="button"
                     className="text-sm bg-love px-3 py-2 rounded-md text-other-white-100 font-semibold hover:animate-glow"
+                    onClick={() => makeDecision("cancelled")}
                   >
                     Reject
                   </button>
                   <button
                     type="submit"
                     className="rounded-md bg-brand px-3 py-2 text-sm text-other-white-100 font-semibold hover:animate-glow"
+                    onClick={() => makeDecision("confirmed")}
                   >
                     Accept
                   </button>

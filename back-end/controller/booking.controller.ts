@@ -1,5 +1,9 @@
 import { Request, Response, NextFunction } from "express";
-import { CreateEntity, DeleteEntity } from "../crud-operation/common-crud";
+import {
+  CreateEntity,
+  DeleteEntity,
+  UpdateEntity,
+} from "../crud-operation/common-crud";
 import { Booking } from "../model";
 import CustomError from "../middleware/CusomError";
 import { DataFoundMessage } from "../const";
@@ -16,7 +20,11 @@ export const updateBooking = (
   req: Request,
   res: Response,
   next: NextFunction
-) => {};
+) => {
+  UpdateEntity(req, res, next, Booking, () => {
+    return req.body.data;
+  });
+};
 
 export const getAllBooking = async (
   req: Request,

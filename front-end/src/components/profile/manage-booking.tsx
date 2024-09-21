@@ -1,9 +1,15 @@
 import { memo, useMemo } from "react";
-import { useGetAllBookingQuery } from "../../state-management/api/booking-api";
+import {
+  useGetAllBookingQuery,
+  useUpdateBookingMutation,
+} from "../../state-management/api/booking-api";
 import { useSelector } from "react-redux";
 import { user } from "../../state-management/local/auth";
 import { InfoText, LoaderSpinner } from "../../units";
 import { useNavigate } from "react-router-dom";
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import { errorTypes } from "../../constant";
+import toast from "react-hot-toast";
 
 interface bookingTypes {
   user: {
@@ -28,6 +34,9 @@ interface bookingTypes {
 export const ManageBookings = memo(() => {
   const { data, isLoading } = useGetAllBookingQuery({});
 
+  const [udpateBooking, { isLoading: bookingUpdate }] =
+    useUpdateBookingMutation();
+
   const userInfo = useSelector(user);
   const nav = useNavigate();
 
@@ -39,7 +48,32 @@ export const ManageBookings = memo(() => {
     }
   }, [data, userInfo?.email]);
 
-  if (isLoading) return <LoaderSpinner />;
+  if (isLoading || bookingUpdate) return <LoaderSpinner />;
+
+  const makeDecision = async (label: string, _id: string) => {
+    const newUpdatedValue = ownerHosteBookingDetails.filter(
+      (data: bookingTypes) => data._id === _id
+    );
+    const updatedData = {
+      ...newUpdatedValue[0],
+      status: label,
+    };
+    await udpateBooking({ id: _id, data: updatedData }).then((resp) => {
+      if (resp.error) {
+        console.log(resp.error);
+        const error = resp.error as FetchBaseQueryError;
+        if ("data" in error) {
+          toast.error((error.data as errorTypes).message as string);
+        }
+        if ("error" in error) {
+          toast.error("Server timed out. Please Try Again Later!!!");
+        }
+      }
+      if (resp.data) {
+        toast.success("Successfully updated!!");
+      }
+    });
+  };
 
   if (ownerHosteBookingDetails && ownerHosteBookingDetails?.length < 0)
     return <div>No User Has Booked Yet.</div>;
@@ -97,12 +131,14 @@ export const ManageBookings = memo(() => {
                   <button
                     type="button"
                     className="text-sm bg-love px-3 py-2 rounded-md text-other-white-100 font-semibold hover:animate-glow"
+                    onClick={() => makeDecision("cancelled", detail._id)}
                   >
                     Reject
                   </button>
                   <button
                     type="submit"
                     className="rounded-md bg-brand px-3 py-2 text-sm text-other-white-100 font-semibold hover:animate-glow"
+                    onClick={() => makeDecision("confirmed", detail._id)}
                   >
                     Accept
                   </button>

@@ -37,7 +37,6 @@ export const YourBooking = memo(() => {
       );
     }
   }, [data, userInfo?._id]);
-  console.log(yourBookingDetails);
 
   if (isLoading) return <LoaderSpinner />;
 
