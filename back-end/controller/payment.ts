@@ -1,16 +1,27 @@
 import { Request, Response } from "express";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export const Payment = async (req: Request, res: Response) => {
   const id = req.params.id;
 
+  const mode = process.env.MODE;
+
+  const website_url =
+    mode === "development"
+      ? "http://localhost:5173/profile/your-booking"
+      : "https://city-hostel-zeta.vercel.app/";
+
+  const return_url =
+    mode === "development"
+      ? "http://localhost:5173/profile/your-booking"
+      : "https://city-hostel-zeta.vercel.app/";
+
   try {
     const data = JSON.stringify({
-      return_url:
-        "http://localhost:5173/profile/your-booking" ||
-        "https://city-hostel-zeta.vercel.app/",
-      website_url:
-        "http://localhost:5173/profile/your-booking" ||
-        "https://city-hostel-zeta.vercel.app/",
+      return_url: return_url,
+      website_url: website_url,
       amount: parseInt(id) * 10,
       purchase_order_id: "test12",
       purchase_order_name: "test",
