@@ -20,7 +20,7 @@ const bookingSchema = new mongoose.Schema(
     paymentStatus: {
       type: String,
       enum: ["HalfPayment", "FullPayment", "Pending"],
-      default: "pending",
+      default: "Pending",
     },
 
     payment: {
