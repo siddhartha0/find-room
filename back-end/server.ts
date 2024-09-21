@@ -7,6 +7,7 @@ import {
   UserRoute,
   RoomRoute,
   CloudeRoute,
+  Payment,
 } from "./routes/";
 
 import mongoose from "mongoose";
@@ -39,6 +40,7 @@ app.use("/user", UserRoute);
 app.use("/book", BookingRoute);
 app.use("/room", RoomRoute);
 app.use("/cloudinary", CloudeRoute);
+app.use("/payment", Payment);
 
 app.use(Logger);
 
