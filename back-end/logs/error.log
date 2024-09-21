@@ -1032,3 +1032,43 @@ Tue, 27 Aug 2024 06:55:11 GMT	POST	/cloudinary/upload	localhost:3333	TypeError: 
     at B:\work\react\city-hostel-server\controller\cloud-storage.ts:8:71
     at new Promise (<anonymous>)
     at __awaiter (B:\work\react\city-hostel-server\controller\cloud-storage.ts:4:12)	The "path" argument must be of type string. Received an instance of Object	TypeError
+Sat, 21 Sep 2024 08:16:25 GMT	GET	/book	localhost:3333	StrictPopulateError: Cannot populate path `User` because it is not in your schema. Set the `strictPopulate` option to false to override.
+    at getModelsMapForPopulate (D:\React\find-room\back-end\node_modules\mongoose\lib\helpers\populate\getModelsMapForPopulate.js:50:12)
+    at populate (D:\React\find-room\back-end\node_modules\mongoose\lib\model.js:4183:21)
+    at _populate (D:\React\find-room\back-end\node_modules\mongoose\lib\model.js:4143:5)
+    at D:\React\find-room\back-end\node_modules\mongoose\lib\model.js:4115:5
+    at new Promise (<anonymous>)
+    at Function.populate (D:\React\find-room\back-end\node_modules\mongoose\lib\model.js:4114:10)
+    at model.Query._find (D:\React\find-room\back-end\node_modules\mongoose\lib\query.js:2347:20)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async model.Query.exec (D:\React\find-room\back-end\node_modules\mongoose\lib\query.js:4401:63)	Cannot populate path `User` because it is not in your schema. Set the `strictPopulate` option to false to override.	StrictPopulateError
+Sat, 21 Sep 2024 08:16:26 GMT	GET	/book	localhost:3333	StrictPopulateError: Cannot populate path `User` because it is not in your schema. Set the `strictPopulate` option to false to override.
+    at getModelsMapForPopulate (D:\React\find-room\back-end\node_modules\mongoose\lib\helpers\populate\getModelsMapForPopulate.js:50:12)
+    at populate (D:\React\find-room\back-end\node_modules\mongoose\lib\model.js:4183:21)
+    at _populate (D:\React\find-room\back-end\node_modules\mongoose\lib\model.js:4143:5)
+    at D:\React\find-room\back-end\node_modules\mongoose\lib\model.js:4115:5
+    at new Promise (<anonymous>)
+    at Function.populate (D:\React\find-room\back-end\node_modules\mongoose\lib\model.js:4114:10)
+    at model.Query._find (D:\React\find-room\back-end\node_modules\mongoose\lib\query.js:2347:20)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async model.Query.exec (D:\React\find-room\back-end\node_modules\mongoose\lib\query.js:4401:63)	Cannot populate path `User` because it is not in your schema. Set the `strictPopulate` option to false to override.	StrictPopulateError
+Sat, 21 Sep 2024 08:16:32 GMT	GET	/book	localhost:3333	StrictPopulateError: Cannot populate path `User` because it is not in your schema. Set the `strictPopulate` option to false to override.
+    at getModelsMapForPopulate (D:\React\find-room\back-end\node_modules\mongoose\lib\helpers\populate\getModelsMapForPopulate.js:50:12)
+    at populate (D:\React\find-room\back-end\node_modules\mongoose\lib\model.js:4183:21)
+    at _populate (D:\React\find-room\back-end\node_modules\mongoose\lib\model.js:4143:5)
+    at D:\React\find-room\back-end\node_modules\mongoose\lib\model.js:4115:5
+    at new Promise (<anonymous>)
+    at Function.populate (D:\React\find-room\back-end\node_modules\mongoose\lib\model.js:4114:10)
+    at model.Query._find (D:\React\find-room\back-end\node_modules\mongoose\lib\query.js:2347:20)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async model.Query.exec (D:\React\find-room\back-end\node_modules\mongoose\lib\query.js:4401:63)	Cannot populate path `User` because it is not in your schema. Set the `strictPopulate` option to false to override.	StrictPopulateError
+Sat, 21 Sep 2024 08:18:34 GMT	GET	/book	localhost:3333	StrictPopulateError: Cannot populate path `hostel` because it is not in your schema. Set the `strictPopulate` option to false to override.
+    at getModelsMapForPopulate (D:\React\find-room\back-end\node_modules\mongoose\lib\helpers\populate\getModelsMapForPopulate.js:50:12)
+    at populate (D:\React\find-room\back-end\node_modules\mongoose\lib\model.js:4183:21)
+    at _populate (D:\React\find-room\back-end\node_modules\mongoose\lib\model.js:4143:5)
+    at D:\React\find-room\back-end\node_modules\mongoose\lib\model.js:4115:5
+    at new Promise (<anonymous>)
+    at Function.populate (D:\React\find-room\back-end\node_modules\mongoose\lib\model.js:4114:10)
+    at model.Query._find (D:\React\find-room\back-end\node_modules\mongoose\lib\query.js:2347:20)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async model.Query.exec (D:\React\find-room\back-end\node_modules\mongoose\lib\query.js:4401:63)	Cannot populate path `hostel` because it is not in your schema. Set the `strictPopulate` option to false to override.	StrictPopulateError

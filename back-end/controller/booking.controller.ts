@@ -25,8 +25,8 @@ export const getAllBooking = async (
 ) => {
   try {
     const bookingDetails = await Booking.find()
-      .populate("User")
-      .populate("hostel");
+      .populate("user")
+      .populate("room");
 
     if (!bookingDetails) return CustomError.searchEntityMissingError(next);
 
