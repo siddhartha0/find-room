@@ -9,7 +9,7 @@ import { InfoText, LoaderSpinner } from "../../units";
 import { useNavigate } from "react-router-dom";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { errorTypes } from "../../constant";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 interface bookingTypes {
   user: {
@@ -80,6 +80,7 @@ export const ManageBookings = memo(() => {
 
   return (
     <div className="relative   rounded-md">
+      <Toaster />
       <table className="table-auto  text-left">
         <thead className=" text-black">
           <tr>
