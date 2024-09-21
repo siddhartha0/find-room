@@ -8,6 +8,9 @@ import {
   BookingPage,
   ProfilePage,
   EditRoomPage,
+  ProfileLayout,
+  ManageBookingPage,
+  CurrentUserPage,
 } from "./pages";
 import { LandingPageContent } from "./hooks";
 import { NavBar, RoomAdd } from "./components";
@@ -33,7 +36,14 @@ createRoot(document.getElementById("root")!).render(
                 <Route path="/booking-details/:id" element={<BookingPage />} />
               </Route>
               <Route path="" element={<AuthenticatedRoutes />}>
-                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/profile" element={<ProfileLayout />}>
+                  <Route index element={<ProfilePage />} />
+                  <Route
+                    path="manage-bookings"
+                    element={<ManageBookingPage />}
+                  />
+                  <Route path="current-users" element={<CurrentUserPage />} />
+                </Route>
               </Route>
             </Route>
           </Routes>

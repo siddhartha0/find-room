@@ -1,6 +1,10 @@
 export { NavBar } from "./home/nav-bar/nav-bar";
 export { HomeSection } from "./home/home-section/home-section";
 export { RoomSection } from "./home/room-section/room-section";
+export { SideBar } from "./profile/side-bar";
+export { CurrentUsers } from "./profile/current-users";
+export { ManageBookings } from "./profile/manage-booking";
+
 export { AboutUs } from "./home/about-section/about-section";
 export { Footer } from "./home/footer/footer";
 export { LogIn } from "./auth/login";

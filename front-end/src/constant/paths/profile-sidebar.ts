@@ -7,13 +7,13 @@ export const ProfileSideBar = [
   },
   {
     id: 2,
-    path: "/manage-bookings",
+    path: "/profile/manage-bookings",
     title: "Manage Bookings",
     icon: "material-symbols-light:bookmarks-outline",
   },
   {
     id: 3,
-    path: "/current-users",
+    path: "/profile/current-users",
     title: "Current Users",
     icon: "mdi:user-outline",
   },

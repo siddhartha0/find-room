@@ -1,11 +1,5 @@
 import toast, { Toaster } from "react-hot-toast";
-import {
-  BreadCrumbLayout,
-  BreadCrumbs,
-  InfoText,
-  InputField,
-  LoaderSpinner,
-} from "../../units";
+import { InfoText, InputField, LoaderSpinner } from "../../units";
 import { Mail, MapPin, Phone, User } from "react-feather";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCredentials, user } from "../../state-management/local/auth";
@@ -82,18 +76,9 @@ export const Profile = () => {
   };
 
   return (
-    <main className="flex flex-col p-8 gap-8">
+    <main className="flex flex-col gap-8">
       <Toaster />
 
-      <header>
-        <BreadCrumbs>
-          <BreadCrumbLayout
-            path="/profile"
-            title="Account Details"
-            current={true}
-          />
-        </BreadCrumbs>
-      </header>
       {isLoading ? (
         <LoaderSpinner />
       ) : (
