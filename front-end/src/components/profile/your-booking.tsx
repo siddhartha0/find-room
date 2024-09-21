@@ -134,7 +134,6 @@ export const YourBooking = memo(() => {
                     <Payment
                       _id={detail._id}
                       checkInDate={detail.checkInDate}
-                      paymentStatus=""
                       room={detail.room}
                       status={detail.status}
                       user={detail.user}

@@ -9,7 +9,6 @@ interface propTypes {
     _id: string;
   };
   _id: string;
-  paymentStatus: string;
   checkInDate: string;
   status: string;
   room: {
@@ -33,6 +32,7 @@ export const Payment = (prop: propTypes) => {
     const updatedData = {
       ...prop,
       paymentStatus: "FullPayment",
+      payment: prop.room.price,
     };
     await udpateBooking({ id: prop._id, data: updatedData }).then((resp) => {
       if (resp.error) {
