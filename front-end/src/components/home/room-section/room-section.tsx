@@ -59,7 +59,9 @@ export const RoomSection = () => {
                 </section>
               </div>
 
-              <Button className="mt-2">See full Details</Button>
+              <Button className="mt-2" onClick={() => nav("/rooms")}>
+                See full Details
+              </Button>
             </RoomCard>
           ))}
         </section>
@@ -84,7 +86,10 @@ export const RoomSection = () => {
             />
           </div>
 
-          <Button className="bg-other-white-100 rounded-lg w-[40%] text-black font-semibold">
+          <Button
+            className="bg-other-white-100 rounded-lg w-[40%] text-black font-semibold"
+            onClick={() => nav("/rooms")}
+          >
             Choose Room
           </Button>
         </div>
