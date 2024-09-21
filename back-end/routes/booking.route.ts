@@ -19,7 +19,7 @@ router.get("/byUser/:id", isAuthorized, getBookingByUserId);
 router
   .route("/:id")
   .delete(isAuthorized, deleteBooking)
-  .get(isOwner, getBookingByRoomId)
+  .get(isAuthorized, getBookingByRoomId)
   .put(isAuthorized, updateBooking);
 
 export default router;

@@ -16,12 +16,17 @@ import { Toaster } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { user } from "../../../../state-management/local/auth";
 import classnames from "classnames";
+import { useGetBookingByIdQuery } from "../../../../state-management/api/booking-api";
 
 export const RoomDetailsLayout = React.memo(() => {
   const { id } = useParams();
 
   const { data, isLoading } = useGetHostelByIdQuery(id);
+  const { data: bookingDetails, isLoading: bookingLoading } =
+    useGetBookingByIdQuery(id);
   const userInfo = useSelector(user);
+
+  console.log(bookingDetails);
 
   const nav = useNavigate();
 
@@ -36,7 +41,7 @@ export const RoomDetailsLayout = React.memo(() => {
         </BreadCrumbs>
       </header>
 
-      {isLoading ? (
+      {isLoading || bookingLoading ? (
         <LoaderSpinner />
       ) : (
         <section className="flex flex-col gap-8">
