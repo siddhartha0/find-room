@@ -131,7 +131,14 @@ export const YourBooking = memo(() => {
                     >
                       Cancel
                     </button>
-                    <Payment id={detail.room.price} />
+                    <Payment
+                      _id={detail._id}
+                      checkInDate={detail.checkInDate}
+                      paymentStatus=""
+                      room={detail.room}
+                      status={detail.status}
+                      user={detail.user}
+                    />
                   </div>
                 </td>
               ) : (
