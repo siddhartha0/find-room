@@ -7,8 +7,32 @@ import {
   UpdateEntity,
 } from "../crud-operation/common-crud";
 import { RoomModel } from "../model";
+import axios from "axios";
 
-export const createRoom = (req: Request, res: Response, next: NextFunction) => {
+export const createRoom = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const recaptchaToken = req.body.recaptchaToken;
+
+  const verificationResponse = await axios.post(
+    `https://www.google.com/recaptcha/api/siteverify`,
+    null,
+    {
+      params: {
+        secret: "6Ld8w0oqAAAAALYWZ4Wu9w1O7YxqbEFQRibZL1Jz",
+        response: recaptchaToken,
+      },
+    }
+  );
+
+  const { success, score } = verificationResponse.data;
+
+  if (!success || (score && score < 0.5)) {
+    return res.status(400).json({ message: "Failed reCAPTCHA verification" });
+  }
+
   CreateEntity(req, res, next, RoomModel, req.body);
 };
 
