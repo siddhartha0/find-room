@@ -7,7 +7,7 @@ export const ProfileLayout = () => {
   const path = location.pathname.split("/");
 
   return (
-    <div className="flex flex-col gap-8 p-8">
+    <div className="flex flex-col gap-2 p-8">
       <header>
         <BreadCrumbs>
           <BreadCrumbLayout

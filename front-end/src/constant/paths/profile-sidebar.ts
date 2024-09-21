@@ -18,3 +18,18 @@ export const ProfileSideBar = [
     icon: "mdi:user-outline",
   },
 ];
+
+export const StudenSideBar = [
+  {
+    id: 1,
+    path: "/profile",
+    title: "Manage Profile",
+    icon: "material-symbols-light:settings-outline",
+  },
+  {
+    id: 2,
+    path: "/profile/your-booking",
+    icon: "material-symbols-light:settings-outline",
+    title: "Your Booking",
+  },
+];

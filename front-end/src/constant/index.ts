@@ -1,6 +1,6 @@
 export { HeaderIconPath } from "./paths/headerIcon-path";
 export { default as HeaderPath } from "./paths/headerPath";
-export { ProfileSideBar } from "./paths/profile-sidebar";
+export { ProfileSideBar, StudenSideBar } from "./paths/profile-sidebar";
 export type { default as StyleProps } from "./style-props/styleProps";
 export { Sizes } from "./style-props/sizes";
 export { RoomData } from "./data/room-data";
