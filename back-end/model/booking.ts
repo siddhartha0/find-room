@@ -17,6 +17,16 @@ const bookingSchema = new mongoose.Schema(
       type: Date,
       required: true,
     },
+    paymentStatus: {
+      type: String,
+      enum: ["HalfPayment", "FullPayment", "Pending"],
+      default: "pending",
+    },
+
+    payment: {
+      type: String,
+      default: "0",
+    },
     checkOutDate: {
       type: Date,
     },
