@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Columns, Mail, Map, Phone, User } from "react-feather";
 import {
   BreadCrumbLayout,
@@ -18,6 +18,12 @@ import { user } from "../../../../state-management/local/auth";
 import classnames from "classnames";
 import { useGetBookingByIdQuery } from "../../../../state-management/api/booking-api";
 
+interface bookingType {
+  user: {
+    _id: string;
+  };
+}
+
 export const RoomDetailsLayout = React.memo(() => {
   const { id } = useParams();
 
@@ -26,7 +32,11 @@ export const RoomDetailsLayout = React.memo(() => {
     useGetBookingByIdQuery(id);
   const userInfo = useSelector(user);
 
-  console.log(bookingDetails);
+  const alreadyBooked = useMemo(() => {
+    return bookingDetails?.data.filter(
+      (details: bookingType) => details?.user._id === userInfo?._id
+    );
+  }, [bookingDetails?.data, userInfo?._id]);
 
   const nav = useNavigate();
 
@@ -65,6 +75,10 @@ export const RoomDetailsLayout = React.memo(() => {
                     Edit Room
                   </Button>
                 </div>
+              ) : alreadyBooked && alreadyBooked.length > 0 ? (
+                <Button onClick={() => nav("/profile/your-booking")}>
+                  See Details
+                </Button>
               ) : (
                 <RoomBookingDetails
                   frequency={data?.data.frequency}
@@ -87,6 +101,7 @@ export const RoomDetailsLayout = React.memo(() => {
             title={data?.data?.title}
             className={classnames("-mt-40", {
               "mt-0": data?.data.ownerEmail === userInfo?.email,
+              "mt-4": alreadyBooked && alreadyBooked.length > 0,
             })}
           />
           <div className="flex gap-10 place-items-center">
