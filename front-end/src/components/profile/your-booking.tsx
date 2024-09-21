@@ -67,7 +67,7 @@ export const YourBooking = memo(() => {
 
   if (isLoading || deleteLoading) return <LoaderSpinner />;
 
-  if (yourBookingDetails && yourBookingDetails?.length < 0)
+  if (yourBookingDetails && yourBookingDetails?.length <= 0)
     return <div>You have not book any hostel yet.</div>;
 
   return (
@@ -139,8 +139,14 @@ export const YourBooking = memo(() => {
                   </div>
                 </td>
               ) : (
-                <td className="py-4 border text-center cursor-pointer  p-4">
-                  No Action Available
+                <td className="py-4 border text-center  p-4">
+                  <button
+                    type="button"
+                    className="text-sm bg-love px-3 py-2 rounded-md text-other-white-100 font-semibold hover:animate-glow"
+                    onClick={() => cancel(detail._id)}
+                  >
+                    Delete
+                  </button>
                 </td>
               )}
             </tr>

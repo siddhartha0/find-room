@@ -23,6 +23,7 @@ interface bookingTypes {
   paymentStatus: string;
   createdAt: string;
   checkInDate: string;
+  status: string;
   room: {
     ownerEmail: string;
     hostelName: string;
@@ -43,7 +44,9 @@ export const ManageBookings = memo(() => {
   const ownerHosteBookingDetails = useMemo(() => {
     if (data) {
       return data?.data.filter(
-        (booking: bookingTypes) => booking.room.ownerEmail === userInfo?.email
+        (booking: bookingTypes) =>
+          booking.room.ownerEmail === userInfo?.email &&
+          booking.status !== "cancelled"
       );
     }
   }, [data, userInfo?.email]);
@@ -75,7 +78,7 @@ export const ManageBookings = memo(() => {
     });
   };
 
-  if (ownerHosteBookingDetails && ownerHosteBookingDetails?.length < 0)
+  if (ownerHosteBookingDetails && ownerHosteBookingDetails?.length <= 0)
     return <div>No User Has Booked Yet.</div>;
 
   return (
