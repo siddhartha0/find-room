@@ -42,7 +42,7 @@ export const YourBooking = memo(() => {
   if (isLoading) return <LoaderSpinner />;
 
   if (yourBookingDetails && yourBookingDetails?.length < 0)
-    return <div>No User Has Booked Yet.</div>;
+    return <div>You have not book any hostel yet.</div>;
 
   return (
     <div className="relative   rounded-md">
