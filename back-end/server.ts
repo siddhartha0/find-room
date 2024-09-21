@@ -10,16 +10,19 @@ import {
 } from "./routes/";
 
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 const app = express();
+
+dotenv.config();
 
 app.use(cors());
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
 
+const uri = process.env.MONGO_DB_URI ?? "";
+
 mongoose
-  .connect(
-    "mongodb+srv://bijay69:bj89682466@cluster0.f4s7u.mongodb.net/city-hostel?retryWrites=true&w=majority"
-  )
+  .connect(uri)
   .then(() => {
     console.log("Connected to Database");
   })

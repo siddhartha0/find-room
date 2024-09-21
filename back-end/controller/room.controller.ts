@@ -7,7 +7,10 @@ import {
   UpdateEntity,
 } from "../crud-operation/common-crud";
 import { RoomModel } from "../model";
+import dotenv from "dotenv";
 import axios from "axios";
+
+dotenv.config();
 
 export const createRoom = async (
   req: Request,
@@ -21,7 +24,7 @@ export const createRoom = async (
     null,
     {
       params: {
-        secret: "6Ld8w0oqAAAAALYWZ4Wu9w1O7YxqbEFQRibZL1Jz",
+        secret: process.env.GOOGLE_SECRET_KEY_CAPTCHA,
         response: recaptchaToken,
       },
     }
