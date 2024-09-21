@@ -372,7 +372,9 @@ export const RoomAdd = React.memo(() => {
             </button>
             <button
               type="submit"
-              className="rounded-md bg-brand px-3 py-2 text-sm text-white font-semibold hover:animate-glow"
+              className={`rounded-md bg-brand px-3 py-2 text-sm text-white font-semibold hover:animate-glow ${
+                !captchaValue ? "cursor-not-allowed" : ""
+              }`}
               disabled={!captchaValue}
             >
               Save
