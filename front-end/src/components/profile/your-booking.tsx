@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import toast, { Toaster } from "react-hot-toast";
 import { errorTypes } from "../../constant";
+import { Payment } from "../payment/payment";
 
 interface bookingTypes {
   user: {
@@ -130,12 +131,7 @@ export const YourBooking = memo(() => {
                     >
                       Cancel
                     </button>
-                    <button
-                      type="submit"
-                      className="rounded-md bg-brand px-3 py-2 text-sm text-other-white-100 font-semibold hover:animate-glow"
-                    >
-                      Pay
-                    </button>
+                    <Payment id={detail.room.price} />
                   </div>
                 </td>
               ) : (

@@ -5,5 +5,6 @@ export const USER_URL = "user";
 export const upload_Cloud_URL = "/cloudinary/upload";
 
 export const Room_URL = "room";
+export const PAYMENT_URL = "payment";
 
 export const Booking_URL = "book";
