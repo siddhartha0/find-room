@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
 export const sendMail = async (to: string, subject: string, text: string) => {
   console.log(process.env.GMAIL_ACCOUNT);
   const mailOptions = {
-    from: process.env.EMAIL,
+    from: process.env.GMAIL_ACCOUNT,
     to,
     subject,
     html: text,
