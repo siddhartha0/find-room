@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { Button, InfoText, MediumInfoText } from "../../units";
 import { Lock, Mail, Navigation, Phone, User } from "react-feather";
 import { InputField } from "../../units/input-field/input-field";
-import { authPropTypes } from "./layout";
 import { errorTypes, role } from "../../constant";
 import { useSignUpMutation } from "../../state-management/api/auth-api";
 import toast, { Toaster } from "react-hot-toast";
 import LoaderSpinner from "../../units/loader/loader-spinner";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import { useAuthContext } from "../../hooks";
 
-export const SignUp = React.memo(({ setHaveAccount }: authPropTypes) => {
+export const SignUp = React.memo(() => {
   const [userDetails, setUserDetails] = useState({
     userName: "",
     contact: "",
@@ -18,6 +18,8 @@ export const SignUp = React.memo(({ setHaveAccount }: authPropTypes) => {
     password: "",
     role: "",
   });
+
+  const authContext = useAuthContext();
 
   const [create, { isLoading }] = useSignUpMutation();
 
@@ -43,8 +45,13 @@ export const SignUp = React.memo(({ setHaveAccount }: authPropTypes) => {
         }
       }
       if (data.data) {
+        console.log(data.data);
         toast.success(data.data.msg);
-        setHaveAccount(true);
+        localStorage.setItem("signuptoken", JSON.stringify(data?.data?.token));
+        authContext?.setauthModalStatus({
+          ...authContext.authModalStatus,
+          otpSection: true,
+        });
       }
     });
   };
@@ -145,7 +152,13 @@ export const SignUp = React.memo(({ setHaveAccount }: authPropTypes) => {
         <InfoText
           title="Sign In"
           className="hover:animate-glow cursor-pointer"
-          onClick={() => setHaveAccount(true)}
+          onClick={() =>
+            authContext?.setauthModalStatus({
+              ...authContext.authModalStatus,
+              haveAccount: true,
+              otpSection: false,
+            })
+          }
         />
       </div>
     </main>

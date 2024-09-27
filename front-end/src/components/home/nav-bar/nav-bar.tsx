@@ -82,7 +82,12 @@ export const NavBar = React.memo(() => {
         ) : (
           <Button
             className="w-32"
-            onClick={() => authContext?.setauthModalStatus(true)}
+            onClick={() =>
+              authContext?.setauthModalStatus({
+                ...authContext.authModalStatus,
+                loginMenu: true,
+              })
+            }
           >
             Log In
           </Button>

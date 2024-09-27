@@ -11,6 +11,19 @@ const AuthApi = MainApi.injectEndpoints({
       }),
     }),
 
+    verifyOTP: builder.mutation({
+      query: (data) => ({
+        url: `${Auth_URL}/verify-otp`,
+        method: "POST",
+        body: data,
+        headers: {
+          Authorization: `Bearer ${JSON.parse(
+            localStorage.getItem("signuptoken") as string
+          )}`,
+        },
+      }),
+    }),
+
     logIn: builder.mutation({
       query: (data) => ({
         url: `${Auth_URL}/login`,
@@ -21,4 +34,5 @@ const AuthApi = MainApi.injectEndpoints({
   }),
 });
 
-export const { useSignUpMutation, useLogInMutation } = AuthApi;
+export const { useSignUpMutation, useLogInMutation, useVerifyOTPMutation } =
+  AuthApi;

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Button, InfoText, MediumInfoText } from "../../units";
 import { Lock, Mail } from "react-feather";
 import { InputField } from "../../units/input-field/input-field";
-import { authPropTypes } from "./layout";
 import { useDispatch } from "react-redux";
 import { useLogInMutation } from "../../state-management/api/auth-api";
 import { logIn } from "../../state-management/local/auth";
@@ -12,7 +11,7 @@ import LoaderSpinner from "../../units/loader/loader-spinner";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { errorTypes } from "../../constant";
 
-export const LogIn = React.memo(({ setHaveAccount }: authPropTypes) => {
+export const LogIn = React.memo(() => {
   const [userDetails, setUserDetails] = useState({
     email: "",
     password: "",
@@ -49,7 +48,10 @@ export const LogIn = React.memo(({ setHaveAccount }: authPropTypes) => {
           user: data?.data?.user ?? null,
         };
         dispatch(logIn(toStore));
-        authContext?.setauthModalStatus(false);
+        authContext?.setauthModalStatus({
+          ...authContext.authModalStatus,
+          loginMenu: false,
+        });
       }
     });
   };
@@ -98,7 +100,12 @@ export const LogIn = React.memo(({ setHaveAccount }: authPropTypes) => {
         <InfoText
           title="Sign up"
           className="hover:animate-glow cursor-pointer"
-          onClick={() => setHaveAccount(false)}
+          onClick={() =>
+            authContext?.setauthModalStatus({
+              ...authContext.authModalStatus,
+              haveAccount: false,
+            })
+          }
         />
       </div>
     </main>

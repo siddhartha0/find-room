@@ -1,8 +1,14 @@
 import React, { createContext, useState } from "react";
 
+interface propTypes {
+  loginMenu: boolean;
+  haveAccount: boolean;
+  otpSection: boolean;
+}
+
 interface contextPropTypes {
-  setauthModalStatus: React.Dispatch<React.SetStateAction<boolean>>;
-  authModalStatus: boolean;
+  setauthModalStatus: React.Dispatch<React.SetStateAction<propTypes>>;
+  authModalStatus: propTypes;
 }
 
 export const landingPageContext = createContext<contextPropTypes | null>(null);
@@ -13,7 +19,11 @@ interface landingpageContextPropTypes {
 
 export const LandingPageContent = React.memo(
   ({ children }: landingpageContextPropTypes) => {
-    const [authModalStatus, setauthModalStatus] = useState(false);
+    const [authModalStatus, setauthModalStatus] = useState({
+      loginMenu: false,
+      haveAccount: false,
+      otpSection: false,
+    });
 
     return (
       <landingPageContext.Provider

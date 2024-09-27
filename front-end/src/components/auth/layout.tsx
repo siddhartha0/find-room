@@ -1,19 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import { LogIn } from "./login";
 import { SignUp } from "./signup";
-
-export interface authPropTypes {
-  setHaveAccount: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { useAuthContext } from "../../hooks";
+import { Otp } from "./otp";
 
 export const AuthLayout = React.memo(() => {
-  const [haveAccount, setHaveAccount] = useState(true);
+  const loginMenu = useAuthContext();
+
   return (
     <div>
-      {haveAccount ? (
-        <LogIn setHaveAccount={setHaveAccount} />
+      {loginMenu?.authModalStatus.haveAccount ? (
+        <LogIn />
+      ) : loginMenu?.authModalStatus.otpSection ? (
+        <Otp />
       ) : (
-        <SignUp setHaveAccount={setHaveAccount} />
+        <SignUp />
       )}
     </div>
   );
