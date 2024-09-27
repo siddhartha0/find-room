@@ -8,6 +8,8 @@ export interface user {
   password: string;
   role: string;
   _id: ObjectId;
+  otp?: string;
+  isVerify?: boolean;
 }
 
 export interface updateUser {

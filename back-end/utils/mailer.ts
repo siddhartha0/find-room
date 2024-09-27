@@ -12,11 +12,12 @@ const transporter = nodemailer.createTransport({
 });
 
 export const sendMail = async (to: string, subject: string, text: string) => {
+  console.log(process.env.GMAIL_ACCOUNT);
   const mailOptions = {
     from: process.env.EMAIL,
     to,
     subject,
-    text,
+    html: text,
   };
 
   try {

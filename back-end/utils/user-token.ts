@@ -11,6 +11,7 @@ export const generateToken = (user: user) => {
     contact: user.contact,
     address: user.address,
     _id: user._id,
+    otp: user.otp,
   };
   const token = jwt.sign(payload, "SecretKey", {
     expiresIn: "30d",
