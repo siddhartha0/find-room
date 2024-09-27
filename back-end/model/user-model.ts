@@ -20,6 +20,10 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
   },
+  isVerify: {
+    type: Boolean,
+    default: false,
+  },
 });
 const UserModel = mongoose.model<user & mongoose.Document>("User", userSchema);
 
