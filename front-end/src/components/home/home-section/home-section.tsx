@@ -24,7 +24,10 @@ export const HomeSection = () => {
             className="mt-5"
             onClick={() => {
               if (!token) {
-                bookingContext?.setauthModalStatus(true);
+                bookingContext?.setauthModalStatus({
+                  ...bookingContext.authModalStatus,
+                  loginMenu: true,
+                });
               } else {
                 nav("/rooms");
               }
