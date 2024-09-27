@@ -4,7 +4,6 @@ import {
   HeaderInfoText,
   InfoText,
   InputField,
-  LoaderSpinner,
   MediumInfoText,
 } from "../../../../units";
 import { useSelector } from "react-redux";
@@ -13,7 +12,6 @@ import { useBookHostelMutation } from "../../../../state-management/api/booking-
 import toast, { Toaster } from "react-hot-toast";
 import { errorTypes } from "../../../../constant";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
-import { Otp } from "../../../auth/otp";
 import { MessageSquare } from "react-feather";
 import { useGetOTPMutation } from "../../../../state-management/api/otp-api";
 
@@ -38,7 +36,6 @@ export const RoomBookingDetails = React.memo((data: bookingPropTypes) => {
     people: 0,
     otpLayout: false,
   });
-  const [dateValue, setValue] = useState("");
 
   const userInfo = useSelector(user);
 
@@ -81,7 +78,8 @@ export const RoomBookingDetails = React.memo((data: bookingPropTypes) => {
     const bookingDetails = {
       user: userDetails,
       room: roomDetails,
-      checkInDate: dateValue,
+      checkInDate: localInputFieldValue.dateValue,
+      people: localInputFieldValue.people,
     };
 
     await bookHostel(bookingDetails).then((data) => {
