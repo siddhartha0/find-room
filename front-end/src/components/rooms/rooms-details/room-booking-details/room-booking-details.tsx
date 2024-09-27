@@ -28,6 +28,7 @@ interface bookingPropTypes {
   title: string;
   totalbed: number;
   _id: string;
+  ownerEmail?: string;
 }
 
 export const RoomBookingDetails = React.memo((data: bookingPropTypes) => {
@@ -82,6 +83,7 @@ export const RoomBookingDetails = React.memo((data: bookingPropTypes) => {
       checkInDate: localInputFieldValue.dateValue,
       otp: localInputFieldValue.otp,
       people: localInputFieldValue.people,
+      ownerEmail: data.ownerEmail,
     };
 
     await bookHostel(bookingDetails).then((data) => {
@@ -175,7 +177,7 @@ export const RoomBookingDetails = React.memo((data: bookingPropTypes) => {
         <section className="flex flex-col gap-3">
           <div className="flex place-items-center gap-4">
             <InfoText title="Available Seat :" />
-            <InfoText title="4" />
+            <InfoText title={data.peopleNumber.toString()} />
           </div>
 
           <InfoText title="Check-in" />

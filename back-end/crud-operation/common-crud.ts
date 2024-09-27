@@ -16,7 +16,7 @@ export const CreateEntity = async <T extends user | room | booking>(
     const saveData = new model(data);
     console.log(data);
     await saveData.save();
-    DataFoundMessage(res, saveData, "Entity created successfully!!!");
+    return DataFoundMessage(res, saveData, "Entity created successfully!!!");
   } catch (error) {
     next(error);
   }
@@ -32,7 +32,7 @@ export const FetchOneEntity = async <T extends user | room | booking>(
   try {
     const saveData = new model(data);
     await saveData.save();
-    DataFoundMessage(res, saveData, "Entity created successfully!!!");
+    return DataFoundMessage(res, saveData, "Entity created successfully!!!");
   } catch (error) {
     next(error);
   }
@@ -49,7 +49,7 @@ export const FetchOneEntityById = async <T extends user | room | booking>(
     if (!searchEntity) {
       return CustomError.searchEntityMissingError(next);
     }
-    DataFoundMessage(res, searchEntity);
+    return DataFoundMessage(res, searchEntity);
   } catch (error) {
     next(error);
   }
@@ -66,7 +66,7 @@ export const GetAllEntites = async <T extends user | room | booking>(
     if (!searchEntity) {
       return CustomError.searchEntityMissingError(next);
     }
-    res.status(200).json({
+    return res.status(200).json({
       data: searchEntity,
       msg: "Entity has been fetched succesfully!!!",
     });

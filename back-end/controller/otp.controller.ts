@@ -37,7 +37,7 @@ export const SendOtp = async (
 </div>
 `;
     const token = generateToken(payload);
-    await sendMail(data.email, "Email Verification", emailBody);
+    await sendMail(data.email, "Booking Verfication", emailBody);
     return res.status(200).json({
       msg: "OTP has been sent to your mail!!!",
       token: token,

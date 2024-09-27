@@ -68,8 +68,9 @@ export const verifyOTP = async (
       }
       if (otp.otp === req.user.otp) {
         next();
+      } else {
+        return CustomError.invalidField(next);
       }
-      return CustomError.invalidField(next);
     } catch (err) {
       return CustomError.noTokenError(next);
     }

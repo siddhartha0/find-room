@@ -1,19 +1,39 @@
 import { Request, Response, NextFunction } from "express";
-import {
-  CreateEntity,
-  DeleteEntity,
-  UpdateEntity,
-} from "../crud-operation/common-crud";
+import { DeleteEntity, UpdateEntity } from "../crud-operation/common-crud";
 import { Booking } from "../model";
 import CustomError from "../middleware/CusomError";
 import { DataFoundMessage } from "../const";
+import { BookingNotification, sendMail } from "../utils";
 
-export const createBooking = (
+export const createBooking = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  CreateEntity(req, res, next, Booking, req.body);
+  try {
+    const data = req.body;
+    const saveData = new Booking(data);
+    await saveData.save();
+
+    const body = BookingNotification(
+      data.ownerEmail,
+      data.user.userName,
+      data.room.imgUrl,
+      data.user.email,
+      data.user.contact,
+      data.user.address,
+      data.people,
+      data.room.hostelName,
+      data.room.location,
+      data.room.peopleNumber,
+      data.room.price
+    );
+
+    await sendMail(data.ownerEmail, "Booking Reservation", body);
+    return DataFoundMessage(res, saveData, "Entity created successfully!!!");
+  } catch (error) {
+    return CustomError.tryCatchError(next);
+  }
 };
 
 export const updateBooking = (

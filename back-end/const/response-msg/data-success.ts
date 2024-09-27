@@ -7,7 +7,7 @@ export const DataFoundMessage = (
   msg?: string
 ) => {
   msg = "Success!!! ";
-  res.status(200).json({
+  return res.status(200).json({
     data: data,
     msg: msg,
   });

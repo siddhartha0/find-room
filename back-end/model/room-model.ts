@@ -35,6 +35,10 @@ const roomSchema = new mongoose.Schema({
   ownerEmail: {
     type: String,
   },
+  isAvailable: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const roomModel = mongoose.model<room & mongoose.Document>(

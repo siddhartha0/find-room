@@ -109,6 +109,7 @@ export const RoomDetailsLayout = React.memo(() => {
                   location={data?.data.location}
                   peopleNumber={data?.data.peopleNumber}
                   title={data?.data.title}
+                  ownerEmail={data?.data.ownerEmail}
                   totalbed={data?.data.totalbed}
                 />
               )}
