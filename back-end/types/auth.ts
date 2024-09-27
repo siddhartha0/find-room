@@ -5,7 +5,7 @@ export interface user {
   email: string;
   contact: string;
   address: string;
-  password: string;
+  password?: string;
   role: string;
   _id: ObjectId;
   otp?: string;

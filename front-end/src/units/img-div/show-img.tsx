@@ -2,7 +2,7 @@ import React from "react";
 
 interface showImgPropTypes {
   img: string;
-  height: string;
+  height?: string;
   classname?: string;
   width?: string;
 }

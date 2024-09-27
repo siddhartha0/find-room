@@ -136,7 +136,7 @@ export const logIn = async (
       }
       const hashedPwd = await bcrypt.compare(
         userDetails.password,
-        userExists.password
+        userExists?.password ?? ""
       );
       if (!hashedPwd) {
         return CustomError.invalidField(next);

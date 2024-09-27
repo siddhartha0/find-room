@@ -24,6 +24,7 @@ export const auth = createSlice({
       state.userToken = action.payload.token;
       localStorage.setItem("token", JSON.stringify(action.payload.token));
       localStorage.setItem("user", JSON.stringify(action.payload.user));
+      localStorage.removeItem("signuptoken");
     },
 
     updateCredentials: (state, action) => {

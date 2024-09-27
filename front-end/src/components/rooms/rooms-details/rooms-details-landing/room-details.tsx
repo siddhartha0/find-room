@@ -15,7 +15,6 @@ import { useGetHostelByIdQuery } from "../../../../state-management/api/hostel-a
 import { Toaster } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { user } from "../../../../state-management/local/auth";
-import classnames from "classnames";
 import { useGetBookingByIdQuery } from "../../../../state-management/api/booking-api";
 
 interface bookingType {
@@ -57,7 +56,26 @@ export const RoomDetailsLayout = React.memo(() => {
         <section className="flex flex-col gap-8">
           <HeaderInfoText title={data?.data?.hostelName} />
           <div className="flex justify-around">
-            <ShowImg img={data?.data.imgUrl} height="550px" width="850px" />
+            <div className="flex flex-col gap-8">
+              <ShowImg img={data?.data.imgUrl} width="850px" height="550px" />
+              <HeaderInfoText title={data?.data?.title} />
+              <div className="flex gap-10 place-items-center">
+                <IconWithText icon={Mail} text={`${data?.data.email}`} />
+
+                <IconWithText icon={Phone} text={`${data?.data.contact}`} />
+                <IconWithText icon={Map} text={`${data?.data.location}`} />
+
+                <IconWithText
+                  icon={User}
+                  text={`${data?.data.peopleNumber} people`}
+                />
+
+                <IconWithText
+                  icon={Columns}
+                  text={`${data?.data.totalbed} bed`}
+                />
+              </div>
+            </div>
             <div className="flex flex-col gap-8 w-72">
               {data?.data.ownerEmail === userInfo?.email ? (
                 <div className="flex flex-col gap-4">
@@ -96,26 +114,6 @@ export const RoomDetailsLayout = React.memo(() => {
               )}
               <BrandDetails />
             </div>
-          </div>
-          <HeaderInfoText
-            title={data?.data?.title}
-            className={classnames("-mt-40", {
-              "mt-0": data?.data.ownerEmail === userInfo?.email,
-              "mt-4": alreadyBooked && alreadyBooked.length > 0,
-            })}
-          />
-          <div className="flex gap-10 place-items-center">
-            <IconWithText icon={Mail} text={`${data?.data.email}`} />
-
-            <IconWithText icon={Phone} text={`${data?.data.contact}`} />
-            <IconWithText icon={Map} text={`${data?.data.location}`} />
-
-            <IconWithText
-              icon={User}
-              text={`${data?.data.peopleNumber} people`}
-            />
-
-            <IconWithText icon={Columns} text={`${data?.data.totalbed} bed`} />
           </div>
         </section>
       )}

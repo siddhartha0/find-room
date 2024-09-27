@@ -15,6 +15,7 @@ export {
   Auth_URL,
   upload_Cloud_URL,
   PAYMENT_URL,
+  OTP_API,
 } from "./url/url";
 export type { errorTypes } from "./interface/errorInterface";
 export { ErrorHandler } from "./error/error-handler";

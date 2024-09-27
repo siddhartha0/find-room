@@ -1,5 +1,5 @@
 import express from "express";
-import { isAuthorized, isOwner } from "../middleware/isValidUser";
+import { isAuthorized, verifyOTP } from "../middleware/isValidUser";
 import {
   createBooking,
   deleteBooking,
@@ -11,7 +11,7 @@ import {
 
 const router = express();
 
-router.post("/", isAuthorized, createBooking);
+router.post("/", verifyOTP, createBooking);
 router.get("/", isAuthorized, getAllBooking);
 
 router.get("/byUser/:id", isAuthorized, getBookingByUserId);
