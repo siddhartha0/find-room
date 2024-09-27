@@ -26,6 +26,13 @@ export const createUser = async (
           ...userDetails,
           password: hashedPwd,
         };
+        const verificationUrl = `http://localhost:3333/api/user/verify-email?token=${token}`;
+        await sendMail(
+          userDetails.email,
+          "Email Verification",
+          `Please verify your email by clicking the following link: ${verificationUrl}`
+        );
+
         CreateEntity(req, res, next, UserModel, newData);
       } else return CustomError.entityPropsMissingError(next);
     }
