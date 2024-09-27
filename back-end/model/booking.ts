@@ -22,6 +22,9 @@ const bookingSchema = new mongoose.Schema(
       enum: ["HalfPayment", "FullPayment", "Pending"],
       default: "Pending",
     },
+    people: {
+      type: Number,
+    },
 
     payment: {
       type: String,

@@ -10,7 +10,7 @@ const BookingApi = MainApi.injectEndpoints({
         body: data,
         headers: {
           Authorization: `Bearer ${JSON.parse(
-            localStorage.getItem("token") as string
+            localStorage.getItem("booking-token") as string
           )}`,
         },
       }),

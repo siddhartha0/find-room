@@ -129,8 +129,8 @@ export const RoomBookingDetails = React.memo((data: bookingPropTypes) => {
       }
 
       if (data.data) {
-        toast.success("OTP has been sent to your mail!!!");
-        console.log(data.data);
+        toast.success(data.data.msg);
+        localStorage.setItem("booking-token", JSON.stringify(data.data.token));
         setLocalinputFieldValue({
           ...localInputFieldValue,
           otpLayout: true,
