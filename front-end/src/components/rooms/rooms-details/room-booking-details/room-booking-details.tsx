@@ -4,6 +4,7 @@ import {
   HeaderInfoText,
   InfoText,
   InputField,
+  LoaderSpinner,
   MediumInfoText,
 } from "../../../../units";
 import { useSelector } from "react-redux";
@@ -39,8 +40,8 @@ export const RoomBookingDetails = React.memo((data: bookingPropTypes) => {
 
   const userInfo = useSelector(user);
 
-  const [bookHostel] = useBookHostelMutation();
-  const [getOtp] = useGetOTPMutation();
+  const [bookHostel, { isLoading: bookingLoading }] = useBookHostelMutation();
+  const [getOtp, { isLoading: optLoading }] = useGetOTPMutation();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -79,6 +80,7 @@ export const RoomBookingDetails = React.memo((data: bookingPropTypes) => {
       user: userDetails,
       room: roomDetails,
       checkInDate: localInputFieldValue.dateValue,
+      otp: localInputFieldValue.otp,
       people: localInputFieldValue.people,
     };
 
@@ -128,6 +130,7 @@ export const RoomBookingDetails = React.memo((data: bookingPropTypes) => {
 
       if (data.data) {
         toast.success("OTP has been sent to your mail!!!");
+        console.log(data.data);
         setLocalinputFieldValue({
           ...localInputFieldValue,
           otpLayout: true,
@@ -140,7 +143,7 @@ export const RoomBookingDetails = React.memo((data: bookingPropTypes) => {
     return (
       <main className="flex flex-col gap-8 place-items-center p-8">
         <Toaster />
-        {/* {optLoading && <LoaderSpinner />} */}
+        {bookingLoading && <LoaderSpinner />}
         <MediumInfoText title="Verify OTP" className="uppercase" />
         <form onSubmit={bookRoom} className="flex flex-col gap-10 ">
           <div>
@@ -164,6 +167,7 @@ export const RoomBookingDetails = React.memo((data: bookingPropTypes) => {
     return (
       <main className="flex flex-col gap-5 bg-card-bg-brand p-6 rounded-lg">
         <Toaster />
+        {optLoading && <LoaderSpinner />}
         <div className="flex place-items-end">
           <HeaderInfoText title={data.price} />
           <InfoText title={`/ ${data.frequency}`} />
