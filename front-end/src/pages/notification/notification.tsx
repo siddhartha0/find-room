@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { HeaderInfoText, InfoText } from "../../units";
-import { UseSocketContext } from "../../hooks/context/SocketContext";
+
 import { io } from "socket.io-client";
 
 export const Notification = () => {
