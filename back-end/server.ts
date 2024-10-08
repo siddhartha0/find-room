@@ -13,6 +13,7 @@ import {
 
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import io from "./real-time/RealTime";
 const app = express();
 
 dotenv.config();
@@ -43,6 +44,8 @@ app.use("/room", RoomRoute);
 app.use("/otp", otp);
 app.use("/cloudinary", CloudeRoute);
 app.use("/payment", Payment);
+
+io.listen(3000);
 
 app.use(Logger);
 
