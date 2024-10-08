@@ -1,18 +1,23 @@
 import { Server } from "socket.io";
-import { SendOwnerNotification } from "./OwnerNotification";
+import express from "express";
+import { createServer } from "http";
 
-const io = new Server({
+export const app = express();
+
+export const serverInstance = createServer(app);
+
+export const io = new Server(serverInstance, {
   cors: {
-    origin: ["http://localhost:5173/"],
-    methods: ["GET", "POST"],
+    origin: ["http://localhost:5173", "*"],
+    methods: ["POST", "GET"],
     credentials: true,
   },
 });
 
 io.on("connection", (socket) => {
-  socket.on("Send Owner Notification", () => {
-    console.log(socket.data);
+  console.log("Connect to Socket server", socket.id);
+
+  socket.on("disconnect", () => {
+    console.log("Disconnected from socket server", socket.id);
   });
 });
-
-export default io;
