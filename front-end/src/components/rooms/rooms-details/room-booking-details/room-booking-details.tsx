@@ -15,11 +15,6 @@ import { errorTypes } from "../../../../constant";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { MessageSquare } from "react-feather";
 import { useGetOTPMutation } from "../../../../state-management/api/otp-api";
-import io from "socket.io-client";
-
-const socket = io("http://localhost:3000", {
-  withCredentials: true,
-});
 
 interface bookingPropTypes {
   price: string;
@@ -108,17 +103,6 @@ export const RoomBookingDetails = React.memo((data: bookingPropTypes) => {
         toast.success(
           "Thank you for booking with us. You will be updated soon!!"
         );
-
-        socket.emit("Send Owner Notification", bookingDetails);
-
-        // Optional: Listen for any messages from the server
-        socket.on("Send Owner Notification", (response) => {
-          console.log("Received from server:", response);
-        });
-
-        return () => {
-          socket.off("Send Owner Notification");
-        };
       }
     });
   };

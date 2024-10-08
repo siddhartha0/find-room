@@ -9,3 +9,4 @@ export { ProfileLayout } from "./profile/profile-layout";
 export { CurrentUserPage } from "./profile/current-user-page";
 export { ManageBookingPage } from "./profile/manage-bookings-page";
 export { YourBookingPage } from "./profile/your-booking-page";
+export { Notification } from "./notification/notification";

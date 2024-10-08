@@ -6,7 +6,7 @@ import { useAuthContext, useOutsideClick } from "../../../hooks";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut, userToken } from "../../../state-management/local/auth";
-import { LogOut, Menu, User } from "react-feather";
+import { LogOut, Menu, User, Bell } from "react-feather";
 
 export const NavBar = React.memo(() => {
   const authContext = useAuthContext();
@@ -75,6 +75,17 @@ export const NavBar = React.memo(() => {
                 >
                   <Icon name={LogOut} iconSize={22} />
                   <InfoText title="Log out" />
+                </div>
+
+                <div
+                  className="flex gap-4  cursor-pointer "
+                  onClick={() => {
+                    nav("/notification");
+                    setDropDownProfileMenu(false);
+                  }}
+                >
+                  <Icon name={Bell} iconSize={22} />
+                  <InfoText title="Notification" />
                 </div>
               </section>
             )}

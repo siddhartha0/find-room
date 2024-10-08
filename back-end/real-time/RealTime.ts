@@ -8,7 +8,11 @@ export const serverInstance = createServer(app);
 
 export const io = new Server(serverInstance, {
   cors: {
-    origin: ["http://localhost:5173", "https://city-hostel-zeta.vercel.app/"],
+    origin: [
+      "http://localhost:5173",
+      "https://city-hostel-zeta.vercel.app/",
+      "*",
+    ],
     methods: ["POST", "GET"],
     credentials: true,
   },

@@ -4,6 +4,7 @@ import { Booking } from "../model";
 import CustomError from "../middleware/CusomError";
 import { DataFoundMessage } from "../const";
 import { BookingNotification, sendMail } from "../utils";
+import { io } from "../real-time/RealTime";
 
 export const createBooking = async (
   req: Request,
@@ -30,6 +31,10 @@ export const createBooking = async (
     );
 
     await sendMail(data.ownerEmail, "Booking Reservation", body);
+    const notification = `Following user with name: ${data.user.userName} has send the booking notification to ${data.room.hostelName}`;
+
+    io.emit("push-notification", notification);
+
     return DataFoundMessage(res, saveData, "Entity created successfully!!!");
   } catch (error) {
     return CustomError.tryCatchError(next);
