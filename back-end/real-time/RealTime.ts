@@ -1,11 +1,18 @@
 import { Server } from "socket.io";
 import { SendOwnerNotification } from "./OwnerNotification";
 
-const io = new Server({});
+const io = new Server({
+  cors: {
+    origin: ["http://localhost:5173/"],
+    methods: ["GET", "POST"],
+    credentials: true,
+  },
+});
 
 io.on("connection", (socket) => {
-  console.log(socket);
-  socket.to("asdf").emit("", SendOwnerNotification);
+  socket.on("Send Owner Notification", () => {
+    console.log(socket.data);
+  });
 });
 
 export default io;

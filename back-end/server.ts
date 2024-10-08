@@ -13,7 +13,7 @@ import {
 
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import io from "./real-time/RealTime";
+import { Server } from "socket.io";
 const app = express();
 
 dotenv.config();
@@ -44,6 +44,20 @@ app.use("/room", RoomRoute);
 app.use("/otp", otp);
 app.use("/cloudinary", CloudeRoute);
 app.use("/payment", Payment);
+
+const io = new Server({
+  cors: {
+    origin: ["http://localhost:5173/"],
+    methods: ["GET", "POST"],
+    credentials: true,
+  },
+});
+
+io.on("connection", (socket) => {
+  socket.on("Send Owner Notification", () => {
+    console.log(socket.data);
+  });
+});
 
 io.listen(3000);
 
