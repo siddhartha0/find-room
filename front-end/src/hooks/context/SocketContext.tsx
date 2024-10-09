@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { io, Socket } from "socket.io-client";
+import { user } from "../../state-management/local/auth";
 
 interface SocketContextType {
   socket: Socket | null;
@@ -11,11 +13,16 @@ export const SocketContent = createContext<SocketContextType>({
 
 export const SocketContext = ({ children }: { children: React.ReactNode }) => {
   const [socket, setSocket] = useState<Socket | null>(null);
+  const userInfo = useSelector(user);
 
   useEffect(() => {
     const socket: Socket = io("http://localhost:3333/", {
       withCredentials: true,
+      query: {
+        userId: userInfo?._id,
+      },
     });
+
     setSocket(socket);
   }, []);
 
