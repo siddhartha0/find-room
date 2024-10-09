@@ -20,6 +20,14 @@ export const io = new Server(serverInstance, {
 
 const users: { [key: string]: string } = {};
 
+export const getUserSocketId = (userId: string) => {
+  let searchUserId = "";
+  if (users) {
+    searchUserId = users[userId];
+  }
+  return searchUserId;
+};
+
 io.on("connection", (socket) => {
   console.log("Connect to Socket server", socket.id);
   const userId = socket.handshake.query.userId as string;
