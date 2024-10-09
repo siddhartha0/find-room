@@ -89,6 +89,7 @@ export const RoomAdd = React.memo(() => {
 
       const toPost = {
         ...details,
+        owner: userInfo?._id,
         imgUrl: picsUrl.data?.imgUrl,
         recaptchaToken: captchaValue,
       };

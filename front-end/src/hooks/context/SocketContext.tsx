@@ -5,7 +5,7 @@ interface SocketContextType {
   socket: Socket | null;
 }
 
-const SocketContent = createContext<SocketContextType>({
+export const SocketContent = createContext<SocketContextType>({
   socket: null,
 });
 
@@ -30,7 +30,7 @@ export const UseSocketContext = () => {
   const socketContext = useContext(SocketContent);
 
   if (!socketContext) {
-    return new Error("Must be wrapped");
+    throw new Error("Must be wrapped");
   }
   return socketContext.socket;
 };

@@ -35,6 +35,11 @@ const roomSchema = new mongoose.Schema({
   ownerEmail: {
     type: String,
   },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
   isAvailable: {
     type: Boolean,
     default: true,
